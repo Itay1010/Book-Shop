@@ -1,19 +1,18 @@
 'use strict'
 
-var gIsModalOpen = false
+var gIsOpen = false;
 
 $(onInit)
 function onInit() {
     console.log('initing');
     createBooks()
     renderBooks()
-    $('.add-book').on('click', onAddBook)
+    $('.dropdown-toggle').on('click', null, this, openDropdown)
 }
 
 function addEventListeners() {
     $('.details-btn').on('click', null, this, onDetails)
-    // $('.update-btn').on('click', null, this, onUpdate)
-    $('.dropdown-toggle').on('click', null, this, openDropdown)
+    // $('.dropdown-toggle').on('click', null, this, openDropdown)
     $('.delete-btn').on('click', null, this, onDelete)
 
 }
@@ -60,10 +59,10 @@ function renderBooks() {
 }
 
 function renderModal(id) {
-    const elModalSection = document.querySelector('.modal section')
+    const elModalSection = document.querySelector('.modal-section')
     const book = getBookById(id)
     const strHtml = `
-        <button onclick="onChangeRating(value, ${book.id})" value=-1>-</button><span class="rate-num">${book.rate}</span><button onclick="onChangeRating(value, ${book.id})" value=1>+</button>
+        <button onclick="onChangeRating(value, ${book.id})" value=-1>-</button><span class="rate-num">${book.rate}</span><button onclick="onChangeRating(value, ${'' + book.id})" value=1>+</button>
         <img onerror="this.src='img/Dune.jpg'" src="${book.imgUrl}" alt="${book.title}">
         <h4>Name: ${book.title}</h4>
         <h4>Price: ${book.price}₪</h4>
@@ -75,20 +74,23 @@ function renderModal(id) {
             praesentium quam?
         </p>
         `
-    elModalSection.innerHTML = strHtml
+        elModalSection.innerHTML = strHtml
 }
 
-function onAddBook() {
-    const name = prompt('Enter book name')
-    const price = +prompt('Enter book price')
+function onAddBook(ev) {
+    ev.preventDefault()
+    const name = ev.target[0].value
+    const price = ev.target[1].value
     if (!name || !price) return
     addBook(name, price)
     renderBooks()
+    closeDropdown()
 }
 
 function onDetails(id) {
     id = id.target.value
-    if (gIsModalOpen) return closeModal()
+    console.log($('.modal-nb')[0])
+    if (gIsOpen) return closeModal(id)
     openModal(id)
 }
 
@@ -104,18 +106,17 @@ function onDelete(id) {
 }
 
 function openModal(id) {
-    id = id.target.value
-    const elModal = document.querySelector('.modal')
+    const elModal = $('.modal-nb')
     renderModal(id)
-    elModal.classList.add('open')
-    gIsModalOpen = true
+    elModal.addClass('open')
+    gIsOpen = true
 }
 
 function closeModal() {
-    const elModal = document.querySelector('.modal')
-    elModal.classList.remove('open')
-    elModal.querySelector('section').innerHTML = ''
-    gIsModalOpen = false
+    const elModal = $('.modal-nb')
+    elModal.removeClass('open')
+    $('.modal-section').html('')
+    gIsOpen = false
 }
 
 function onChangeRating(val, id) {

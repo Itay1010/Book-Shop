@@ -20,8 +20,22 @@
         <h1 class="text-center" data-trans="title">Bookshop Manager</h1>
     </header>
     <div class="container-main">
-        <section class="container m-5">
-            <span class="add-book" data-trans="add">Create new book</span>
+        <section class="container">
+            <span class="add-book dropdown-toggle" id="dropdownMenuButtonAdd" data-bs-toggle="dropdown"
+                aria-expanded="false" data-trans="add">Create new book</span>
+            <ul class="dropdown-menu dropdownMenuButtonAdd text-center" aria-labelledby="dropdownMenuButtonAdd">
+                <form name="add" onsubmit="onAddBook(event)">
+                    <li>
+                        <input type="text" class="" placeholder="Name">
+                    </li>
+                    <li>
+                        <input type="number" class="" placeholder="Price">
+                    </li>
+                    <li>
+                        <button class="btn submit-btn btn-light" value="">Submit</button>
+                    </li>
+                </form>
+            </ul>
             <select class="mx-4 my-1" onchange="onSetLang(this.value)">
                 <option value="en">English</option>
                 <option value="he">עברית</option>
@@ -43,15 +57,15 @@
         </section>
     </div>
 
-    <div class="modal" value="false">
+    <div class="modal-nb">
         <header>
-            <button onclick="closeModal()">x</button>
+            <button>x</button>
             <h5 class="modal-rating">Rating</h5>
         </header>
         <section class="modal-section">
-
         </section>
     </div>
+    
     <!-- frameworks -->
     <script src="vendor/popper/popper.js"></script>
     <script src="vendor/popper/popper.min.js"></script>

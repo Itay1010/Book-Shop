@@ -1,6 +1,6 @@
-.modal {
+.modal-nb {
     transition: right 0.3s;
-    position: fixed;
+    position: absolute;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -11,13 +11,14 @@
     min-height: 85%;
     top: 5px;
     right: -350px;
+    
 }
 
-.modal.open {
+.modal-nb.open {
     right: 20px;
 }
 
-.modal button {
+.modal-nb button {
     display: block;
     border: 10px solid black;
     border: none;
@@ -26,11 +27,11 @@
     cursor: pointer;
 }
 
-.modal header h5 {
+.modal-nb header h5 {
     margin: 0;
 }
 
-.modal section button {
+.modal-section button {
     display: inline-block;
     background-color: #9d7272;
     min-width: 8px;
@@ -45,19 +46,19 @@
     transform: translateY(0.8px);
 }
 
-.modal img {
+.modal-nb img {
     margin: 0 50%;
     transform: translateX(-50%);
     width: 30%;
 }
 
-.modal hr {
+.modal-nb hr {
     background-color: black;
     border: none;
     height: 2px;
     width: 90%;
 }
 
-.modal section h5 {
+.modal-section h5 {
     margin: 10px;
 }
