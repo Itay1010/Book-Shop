@@ -1,0 +1,13 @@
+.dropdown-menu {
+    background-color: #ddd;
+    /* border: 1px solid black; */
+    border-radius: 5%;
+}
+
+.submit-btn {
+    background-color: rgb(58, 206, 58);
+}
+
+.submit-btn:hover {
+    background-color: rgb(58, 206, 58);
+}

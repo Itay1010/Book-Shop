@@ -5,31 +5,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="/img/icon/favicon.ico" type="image/x-icon">
+
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/my-openpop.css">
     <title>Book Shop</title>
 </head>
 
-<body onload="onInit()">
+<body>
     <header>
-        <h1>Bookshop Manager</h1>
+        <h1 class="text-center" data-trans="title">Bookshop Manager</h1>
     </header>
-
-    <section class="table-container">
-        <span onclick="onAddBook()">Create new book</span>
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>id</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th colspan="3" class="action-head">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </section>
+    <div class="container-main">
+        <section class="container m-5">
+            <span class="add-book" data-trans="add">Create new book</span>
+            <select class="mx-4 my-1" onchange="onSetLang(this.value)">
+                <option value="en">English</option>
+                <option value="he">עברית</option>
+                <option value="es">Spanish</option>
+            </select>
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>id</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th colspan="3" class="action-head">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </div>
 
     <div class="modal" value="false">
         <header>
@@ -40,10 +52,18 @@
 
         </section>
     </div>
+    <!-- frameworks -->
+    <script src="vendor/popper/popper.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <script src="js/services/storage.service.js"></script>
     <script src="js/services/book.service.js"></script>
+    <script src="js/services/i18n.service.js"></script>
+    <script src="js/popper.controller.js"></script>
     <script src="js/book.controller.js"></script>
+    <script src="js/i18n.controller.js"></script>
 </body>
 
 </html>

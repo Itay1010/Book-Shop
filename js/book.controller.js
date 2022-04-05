@@ -2,28 +2,61 @@
 
 var gIsModalOpen = false
 
+$(onInit)
 function onInit() {
+    console.log('initing');
     createBooks()
     renderBooks()
+    $('.add-book').on('click', onAddBook)
+}
+
+function addEventListeners() {
+    $('.details-btn').on('click', null, this, onDetails)
+    // $('.update-btn').on('click', null, this, onUpdate)
+    $('.dropdown-toggle').on('click', null, this, openDropdown)
+    $('.delete-btn').on('click', null, this, onDelete)
+
 }
 
 function renderBooks() {
     const books = getBooksForDisplay()
-    const elTable = document.querySelector('.table-container table tbody')
+    const elTable = $('.container table tbody')
     const strHtml = books.map((book) => {
         return `
         <tr>
-            <td><img onerror="img/Dune.jpg" src="${book.imgUrl}" alt="${book.title}"></td>
+            <td class="" ><img class="img-thumbnail" onerror="img/nun.png" src="${book.imgUrl}" alt="${book.title}"></td>
             <td>${book.id}</td>
             <td>${book.title}</td>
             <td>${book.price}₪</td>
-            <td><button onclick="onDetails(value)" value="${book.id}">Details</button></td>
-            <td><button onclick="onUpdate(value)" value="${book.id}">Update</button></td>
-            <td><button onclick="onDelete(value)" value="${book.id}">Delete</button></td>
+            <td><button class="btn details-btn bg-primary" value="${book.id}" data-trans="btn-details">Details</button></td>
+            <td>
+            <div class="dropdown">
+            
+              <button class="btn update-btn bg-success dropdown-toggle" value="${book.id}" id="dropdownMenuButton${book.id}"
+              data-bs-toggle="dropdown"
+              data-trans="btn-update"
+              aria-expanded="false">
+                update
+              </button>
+              <ul class="dropdown-menu dropdownMenuButton${book.id} text-center" aria-labelledby="dropdownMenuButton${book.id}">
+                <form name="update" onsubmit="onSubmit(event)">
+                    <li>
+                    <input type="number" class="" placeholder="Price">
+                    </li>
+                    <li>
+                    <button class="btn submit-btn btn-light" value="${book.id}">Submit</button>
+                    </li>
+                </form>
+              </ul>
+            </div>
+            </td>
+            <td><button class="btn delete-btn bg-danger" value="${book.id}" data-trans="btn-delete">Delete</button></td>
         </tr>
         \n`
     })
-    elTable.innerHTML = strHtml.join('')
+    elTable.html(strHtml)
+    addEventListeners()
+    doTrans()
 }
 
 function renderModal(id) {
@@ -48,24 +81,22 @@ function renderModal(id) {
 function onAddBook() {
     const name = prompt('Enter book name')
     const price = +prompt('Enter book price')
-    if(!name || !price) return
+    if (!name || !price) return
     addBook(name, price)
     renderBooks()
 }
 
 function onDetails(id) {
+    id = id.target.value
     if (gIsModalOpen) return closeModal()
     openModal(id)
 }
 
-function onUpdate(id) {
-    const newPrice = prompt('Enter new price')
-    const reg = new RegExp('[0-9]+.?[0-9]?')
-    if(reg.test(newPrice)) {
-        updateBook(id, newPrice)
-        renderBooks()
-    } else alert('incorrect price value')
+function onUpdate(id, newPrice) {
+    updateBook(id, newPrice)
+    renderBooks()
 }
+
 function onDelete(id) {
     if (!confirm('Are you sure?')) return
     deleteBook(id)
@@ -73,6 +104,7 @@ function onDelete(id) {
 }
 
 function openModal(id) {
+    id = id.target.value
     const elModal = document.querySelector('.modal')
     renderModal(id)
     elModal.classList.add('open')

@@ -1,0 +1,63 @@
+.modal {
+    transition: right 0.3s;
+    position: fixed;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: RosyBrown;
+    border-radius: 5px;
+    width: 300px;
+    height: 95vh;
+    min-height: 85%;
+    top: 5px;
+    right: -350px;
+}
+
+.modal.open {
+    right: 20px;
+}
+
+.modal button {
+    display: block;
+    border: 10px solid black;
+    border: none;
+    padding: 1px 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.modal header h5 {
+    margin: 0;
+}
+
+.modal section button {
+    display: inline-block;
+    background-color: #9d7272;
+    min-width: 8px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.rate-num {
+    display: inline-block;
+    padding: 0 15px;
+    background-color: #9d7272;
+    transform: translateY(0.8px);
+}
+
+.modal img {
+    margin: 0 50%;
+    transform: translateX(-50%);
+    width: 30%;
+}
+
+.modal hr {
+    background-color: black;
+    border: none;
+    height: 2px;
+    width: 90%;
+}
+
+.modal section h5 {
+    margin: 10px;
+}
